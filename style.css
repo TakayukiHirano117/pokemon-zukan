@@ -1,0 +1,15 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.header {
+    background-color: aquamarine;
+}
+
+.data-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 300px 300px 300px;
+    gap: 40px;
+}
