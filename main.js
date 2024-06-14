@@ -38,10 +38,20 @@ const func = async () => {
 
     // data-itemクラスをもつdivタグを作成、☑
     // その中にappendChildでimgタグとpタグを作成し、画像と名前を入れる。
-    const dataItem =  document.createElement('div');
-    dataItem.classList.add('data-item');
+    const dataItem = document.createElement("div");
+    dataItem.classList.add("data-item");
 
+    dataContainer.appendChild(dataItem);
 
+    const dataImg = document.createElement("img");
+    const dataText = document.createElement("p");
+    dataItem.appendChild(dataImg)
+    dataImg.src = pokemonDetail.sprites.front_default
+    dataItem.appendChild(dataText)
+    dataText.textContent = pokemonDetail.species.name
+
+    dataImg.classList.add('pokemon-img')
+    dataText.classList.add('pokemon-name')
   });
 };
 
