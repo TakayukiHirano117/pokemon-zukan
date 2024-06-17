@@ -1,5 +1,6 @@
 // Poke APIのエンドポイント
-const url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=21";
+// const url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=21";
+const url = "https://pokeapi.co/api/v2/pokemon";
 
 // ページネーションに応じたポケモン取得
 const getPokemonsByPage = async (url) => {
@@ -18,8 +19,6 @@ const getPokemonsByPage = async (url) => {
   sessionStorage.setItem("previous", json.previous);
 
   const pokemons = json.results;
-
-  console.log(pokemons)
   
   for (const pokemon of pokemons) {
     const res = await fetch(pokemon.url);
@@ -27,6 +26,7 @@ const getPokemonsByPage = async (url) => {
 
     const dataItem = document.createElement("div");
     dataItem.classList.add("data-item");
+    dataItem.id = pokemon.url.split('/')[6];
 
     const dataImg = document.createElement("img");
     dataImg.src = pokemonDetail.sprites.front_default;
@@ -48,9 +48,10 @@ const getPokemonsByPage = async (url) => {
 getPokemonsByPage(url);
 
 // ポケモン詳細
-const getSinglePokemon = () => {
+const getSinglePokemon = async () => {
+  const targetDataItem = document.getElementById()
   // imgのsrc属性から.pngの前の数字を取得
   // `https://pokeapi.co/api/v2/pokemon/${.pngの前の数字}`みたいなurlでfetch
-  // data-itemクラスの要素を取得、idを付与しておく、一意の画像を取得できるように。
-  
+  // const res = await fetch(`url${}`);
+  // const json = await res.json();
 }
