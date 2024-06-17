@@ -12,12 +12,15 @@
       <h1 class="header-title">ポケモン図鑑</h1>
     </header>
     <div id="data-container" class="data-container">
-      <!-- 画像とポケモンの名前を表示、3列ずつ。 -->
-        <!-- ポケモンの画像 -->
-        <!-- <div class="pokemon-img"></div> -->
-        <!-- ポケモンの名前 -->
-        <!-- <div class="pokemon-name"></div> -->
-       </div>
+      <div class="data-container-child" id="data-container-child">
+
+      </div>
+    </div>
+    <div class="pagination">
+      <button onclick="getPokemons(sessionStorage.getItem('previous'))"><span>&lt;</span></button>
+      <span>&nbsp;</span>
+      <!-- <button><span>&nbsp;2&nbsp;</span></button> -->
+      <button onclick="getPokemons(sessionStorage.getItem('next'))"><span>&gt;</span></button>
     </div>
   </body>
 </html>

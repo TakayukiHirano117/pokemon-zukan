@@ -1,16 +1,45 @@
 body {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-size: 1.2rem;
+  padding: 0;
+}
+
+button:hover {
+  color: rgb(82, 82, 82);
 }
 
 .header {
-    background-color: aquamarine;
+  background-color: aquamarine;
 }
 
-.data-container {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: 300px 300px 300px;
-    gap: 40px;
-    text-align: center;
+/* .data-container {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 300px 300px 300px;
+  gap: 40px;
+  text-align: center;
+} */
+
+.data-container-child {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 300px 300px 300px;
+  gap: 40px;
+  text-align: center;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
 }
