@@ -4,23 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="main.js" defer></script>
   </head>
   <body>
     <header class="header">
       <h1 class="header-title">ポケモン図鑑</h1>
     </header>
-    <div id="data-container" class="data-container">
-      <div class="data-container-child" id="data-container-child">
-
-      </div>
-    </div>
+    <div id="data-container" class="data-container"></div>
     <div class="pagination">
-      <button onclick="getPokemons(sessionStorage.getItem('previous'))"><span>&lt;</span></button>
+      <button onclick="getPokemonsByPage(sessionStorage.getItem('previous'))">
+        <span>&lt;</span>
+      </button>
       <span>&nbsp;</span>
-      <!-- <button><span>&nbsp;2&nbsp;</span></button> -->
-      <button onclick="getPokemons(sessionStorage.getItem('next'))"><span>&gt;</span></button>
+      <button onclick="getPokemonsByPage(sessionStorage.getItem('next'))">
+        <span>&gt;</span>
+      </button>
     </div>
   </body>
 </html>
