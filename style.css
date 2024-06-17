@@ -9,7 +9,7 @@ button {
   border: none;
   cursor: pointer;
   outline: none;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   padding: 0;
 }
 
@@ -21,15 +21,7 @@ button:hover {
   background-color: aquamarine;
 }
 
-/* .data-container {
-  display: grid;
-  justify-content: center;
-  grid-template-columns: 300px 300px 300px;
-  gap: 40px;
-  text-align: center;
-} */
-
-.data-container-child {
+.data-container {
   display: grid;
   justify-content: center;
   grid-template-columns: 300px 300px 300px;
