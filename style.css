@@ -3,6 +3,11 @@ body {
   margin: 0;
 }
 
+h1 {
+    margin: 0;
+    padding: 0;
+}
+
 button {
   cursor: pointer;
   background-color: transparent;
@@ -18,7 +23,10 @@ button:hover {
 }
 
 .header {
-  background-color: aquamarine;
+  background-color: #c7d2fe;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
 }
 
 .data-container {
@@ -27,6 +35,12 @@ button:hover {
   grid-template-columns: 300px 300px 300px;
   gap: 40px;
   text-align: center;
+  margin-top: 3rem;
+  cursor: pointer;
+}
+
+.data-item {
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
 }
 
 .pagination {
