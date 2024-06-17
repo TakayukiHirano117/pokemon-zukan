@@ -3,50 +3,54 @@ const url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=21";
 
 // ページネーションに応じたポケモン取得
 const getPokemonsByPage = async (url) => {
+  // 非同期処理を用いてPoke APIからポケモン情報を取得
   const res = await fetch(url);
-  const pokemons = await res.json();
+  const json = await res.json();
 
-  // 再描画する前にdata-containerの中身をすべて削除
+  // dataContainer配下の要素があれば削除
   const dataContainer = document.getElementById("data-container");
   while (dataContainer.firstChild) {
     dataContainer.removeChild(dataContainer.firstChild);
   }
 
   // セッションに次のページと前のページのURIを保存
-  sessionStorage.setItem("next", pokemons.next);
-  sessionStorage.setItem("previous", pokemons.previous);
+  sessionStorage.setItem("next", json.next);
+  sessionStorage.setItem("previous", json.previous);
 
-  const result = Object.values(pokemons.results);
+  const pokemons = json.results;
 
-  result.map(async (pokemon) => {
+  console.log(pokemons)
+  
+  for (const pokemon of pokemons) {
     const res = await fetch(pokemon.url);
-
-    // ポケモンの詳細情報取得
     const pokemonDetail = await res.json();
 
-    // ポケモン情報を挿入するdiv要素を取得
-    const dataContainer = document.getElementById("data-container");
-
-    // 1件のポケモン情報を挿入するdiv要素を取得
     const dataItem = document.createElement("div");
     dataItem.classList.add("data-item");
-    dataContainer.appendChild(dataItem);
 
-    // ポケモンの画像を取得し、imgタグに挿入
     const dataImg = document.createElement("img");
     dataImg.src = pokemonDetail.sprites.front_default;
     dataImg.classList.add("pokemon-img");
 
-    // ポケモンの名前を取得し、pタグに挿入
     const dataText = document.createElement("p");
     dataText.textContent = pokemonDetail.species.name;
     dataText.classList.add("pokemon-name");
-    
-    // dataItemタグにポケモン画像と名前を挿入
+
     dataItem.appendChild(dataImg);
     dataItem.appendChild(dataText);
-  });
+
+    dataContainer.appendChild(dataItem);
+  }
 };
+
 
 // 初期ページ表示
 getPokemonsByPage(url);
+
+// ポケモン詳細
+const getSinglePokemon = () => {
+  // imgのsrc属性から.pngの前の数字を取得
+  // `https://pokeapi.co/api/v2/pokemon/${.pngの前の数字}`みたいなurlでfetch
+  // data-itemクラスの要素を取得、idを付与しておく、一意の画像を取得できるように。
+  
+}

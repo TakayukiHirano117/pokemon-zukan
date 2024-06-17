@@ -1,11 +1,14 @@
 body {
   padding: 0;
   margin: 0;
+  background: #f8fafc;
 }
 
 h1 {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  color: #0f172a;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 button {
@@ -25,6 +28,7 @@ button:hover {
 .header {
   background-color: #c7d2fe;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
   position: sticky;
   top: 0;
 }
@@ -40,7 +44,8 @@ button:hover {
 }
 
 .data-item {
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
 }
 
 .pagination {
@@ -48,4 +53,11 @@ button:hover {
   align-items: center;
   justify-content: center;
   margin: 2rem 0;
+}
+
+.pokemon-name {
+    font-weight: bold;
+    color: #0f172a;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 1.2rem;
 }
