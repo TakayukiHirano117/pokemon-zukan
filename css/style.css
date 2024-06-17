@@ -19,10 +19,15 @@ button {
   outline: none;
   font-size: 1.5rem;
   padding: 0;
+  transition: all .3s;
 }
 
 button:hover {
-  color: rgb(82, 82, 82);
+  color: light-dark(rgba(16, 16, 16, 0.3), rgba(255, 255, 255, 0.3));
+}
+
+.disable-hover-style:hover {
+    color: light-dark(rgba(16, 16, 16, 0.3), rgba(255, 255, 255, 0.3));
 }
 
 .header {
@@ -46,6 +51,11 @@ button:hover {
 .data-item {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;
+  transition: all .3s;
+}
+
+.data-item:hover {
+    background-color: #e2e8f0;
 }
 
 .pagination {

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ポケモン図鑑</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="public/pikachu.png" />
+    <script src="js/main.js" defer></script>
   </head>
   <body>
     <header class="header">
@@ -13,11 +14,17 @@
     </header>
     <div id="data-container" class="data-container"></div>
     <div class="pagination">
-      <button onclick="getPokemonsByPage(sessionStorage.getItem('previous'))" id="previous">
+      <button
+        onclick="getPokemonsByPage(sessionStorage.getItem('previous'))"
+        id="previous"
+      >
         <span>&lt;</span>
       </button>
       <span>&nbsp;</span>
-      <button onclick="getPokemonsByPage(sessionStorage.getItem('next'))">
+      <button
+        onclick="getPokemonsByPage(sessionStorage.getItem('next'))"
+        id="next"
+      >
         <span>&gt;</span>
       </button>
     </div>
