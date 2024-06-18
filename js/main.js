@@ -1,14 +1,12 @@
 // Poke APIのエンドポイント
 const url = "https://pokeapi.co/api/v2/pokemon?limit=21";
-// https://pokeapi.co/api/v2/pokemon-species/9/
 
 // ページネーションに応じたポケモン取得
 const getPokemonsByPage = async (url) => {
+
   // 非同期処理を用いてPoke APIからポケモン情報を取得
   const res = await fetch(url);
   const json = await res.json();
-
-  console.log(json);
 
   // dataContainer配下の要素があれば削除
   const dataContainer = document.getElementById("data-container");
@@ -49,11 +47,13 @@ const getPokemonsByPage = async (url) => {
     const res = await fetch(pokemon.url);
     const pokemonDetail = await res.json();
 
-    console.log(pokemonDetail)
+    console.log(pokemonDetail);
 
     const dataItem = document.createElement("div");
     dataItem.classList.add("data-item");
     dataItem.id = pokemon.url.split("/")[6];
+
+    // const dataAnker = document.createElement("a");
 
     const dataImg = document.createElement("img");
     dataImg.src = pokemonDetail.sprites.front_default;
@@ -67,6 +67,13 @@ const getPokemonsByPage = async (url) => {
     dataItem.appendChild(dataText);
 
     dataContainer.appendChild(dataItem);
+
+    dataItem.addEventListener("click", (e) => {
+      const clickedElementId = e.target.id;
+      sessionStorage.setItem("dataItemId", clickedElementId);
+
+      location.href = "detail.html";
+    });
   }
 };
 
