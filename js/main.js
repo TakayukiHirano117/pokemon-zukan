@@ -1,14 +1,12 @@
 // Poke APIのエンドポイント
 const url = "https://pokeapi.co/api/v2/pokemon?limit=21";
-// https://pokeapi.co/api/v2/pokemon-species/9/
 
 // ページネーションに応じたポケモン取得
 const getPokemonsByPage = async (url) => {
+
   // 非同期処理を用いてPoke APIからポケモン情報を取得
   const res = await fetch(url);
   const json = await res.json();
-
-  console.log(json);
 
   // dataContainer配下の要素があれば削除
   const dataContainer = document.getElementById("data-container");
@@ -81,7 +79,3 @@ const getPokemonsByPage = async (url) => {
 
 // 初期ページ表示
 getPokemonsByPage(url);
-
-const transitionDetailPage = () => {
-  location.href = "detail.html";
-};
