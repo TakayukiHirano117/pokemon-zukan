@@ -23,7 +23,7 @@ button {
 }
 
 button:hover {
-  color: light-dark(rgba(16, 16, 16, 0.3), rgba(255, 255, 255, 0.3));
+  color: #1010104D;
 }
 
 .disable-hover-style:hover {
