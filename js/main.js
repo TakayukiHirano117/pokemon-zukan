@@ -49,11 +49,13 @@ const getPokemonsByPage = async (url) => {
     const res = await fetch(pokemon.url);
     const pokemonDetail = await res.json();
 
-    console.log(pokemonDetail)
+    console.log(pokemonDetail);
 
     const dataItem = document.createElement("div");
     dataItem.classList.add("data-item");
     dataItem.id = pokemon.url.split("/")[6];
+
+    // const dataAnker = document.createElement("a");
 
     const dataImg = document.createElement("img");
     dataImg.src = pokemonDetail.sprites.front_default;
@@ -67,8 +69,19 @@ const getPokemonsByPage = async (url) => {
     dataItem.appendChild(dataText);
 
     dataContainer.appendChild(dataItem);
+
+    dataItem.addEventListener("click", (e) => {
+      const clickedElementId = e.target.id;
+      sessionStorage.setItem("dataItemId", clickedElementId);
+
+      location.href = "detail.html";
+    });
   }
 };
 
 // 初期ページ表示
 getPokemonsByPage(url);
+
+const transitionDetailPage = () => {
+  location.href = "detail.html";
+};
