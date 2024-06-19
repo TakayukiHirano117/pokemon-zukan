@@ -5,7 +5,7 @@ const getSinglePokemon = async () => {
   const dataItemId = sessionStorage.getItem("dataItemId");
   const detailUrl = url + "/" + dataItemId;
 
-  const res = await fetch(detailUrl);
+  const res = await fetch(detailUrl, { cache: "force-cache" });
   const pokemon = await res.json();
 
   const dataContainer = document.getElementById("data-container");
