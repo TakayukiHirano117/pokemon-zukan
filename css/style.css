@@ -86,3 +86,7 @@ button:hover {
 .last-page-btn {
   font-size: 1.2rem;
 }
+
+.current-page {
+  margin: 0 1rem;
+}

@@ -1,16 +1,21 @@
-// Poke APIのエンドポイント
+// 1度に取得するポケモンの数、最終ページの取得開始位置を指定
 const limit = 21;
 const lastPageOffset = 1281;
-const url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
 
-// ページネーションに応じたポケモン取得
+// Poke APIのエンドポイント
+const url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
+// https://pokeapi.co/api/v2/pokemon-species/8/
+
+// ページに応じたポケモン取得
 const getPokemonsByPage = async (url) => {
   const res = await fetch(url, { cache: "force-cache" });
   const json = await res.json();
 
+  // dataContainerの中身を削除
   const dataContainer = document.getElementById("data-container");
-  dataContainer.innerHTML = ""; // 不要なDOM操作の削減
+  dataContainer.innerHTML = "";
 
+  // sessionから次のページ・前のページのURL, ポケモンの総数を取得
   sessionStorage.setItem("next", json.next);
   sessionStorage.setItem("previous", json.previous);
   sessionStorage.setItem("count", json.count);
@@ -49,14 +54,12 @@ const getPokemonsByPage = async (url) => {
 
     dataContainer.appendChild(dataItem);
 
-    // クリックイベントを最適化
     dataItem.addEventListener("click", () => {
       sessionStorage.setItem("dataItemId", dataItem.id);
       location.href = "detail.html";
     });
   });
 
-  // ページネーションの制御を最適化
   const previous = document.getElementById("previous");
   const next = document.getElementById("next");
 
@@ -75,6 +78,8 @@ const getPokemonsByPage = async (url) => {
     next.disabled = false;
     next.classList.remove("disable-hover-style");
   }
+
+  displayCurrentPage()
 };
 
 // 最初のページに飛ぶ
@@ -90,3 +95,22 @@ const getLastPage = () => {
 
 // 初期ページ表示
 document.addEventListener("DOMContentLoaded", getPokemonsByPage(url));
+
+// 現在のページ表示
+const displayCurrentPage = () => {
+  if (sessionStorage.getItem('previous') === 'null') {
+    currentPage = 1;
+  } else if (sessionStorage.getItem('next') === 'null') {
+    currentPage = sessionStorage.getItem('count') / limit;
+  } else {
+    const next = sessionStorage.getItem('next');
+    const nextObj = new URL(next);
+    const nextParams = nextObj.searchParams;
+    const nextOffset = nextParams.get('offset');
+
+    currentPage = nextOffset / limit;
+  }
+
+  const target = document.getElementById('current-page');
+  target.textContent = currentPage;
+}
