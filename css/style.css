@@ -78,3 +78,11 @@ button:hover {
 .pokemon-img {
   margin-top: 2rem;
 }
+
+.first-page-btn {
+  font-size: 1.2rem;
+}
+
+.last-page-btn {
+  font-size: 1.2rem;
+}
