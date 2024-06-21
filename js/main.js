@@ -1,5 +1,7 @@
 // Poke APIのエンドポイント
-const url = "https://pokeapi.co/api/v2/pokemon?limit=21";
+const limit = 21;
+const lastPageOffset = 1281;
+const url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
 
 // ページネーションに応じたポケモン取得
 const getPokemonsByPage = async (url) => {
@@ -31,7 +33,11 @@ const getPokemonsByPage = async (url) => {
     dataItem.id = pokemon.url.split("/")[6];
 
     const dataImg = document.createElement("img");
-    dataImg.src = pokemonDetail.sprites.front_default;
+    if (pokemonDetail.sprites.front_default === null) {
+      dataImg.src = "public/substitute.png";
+    } else {
+      dataImg.src = pokemonDetail.sprites.front_default;
+    }
     dataImg.classList.add("pokemon-img");
 
     const dataText = document.createElement("p");
@@ -71,6 +77,16 @@ const getPokemonsByPage = async (url) => {
   }
 };
 
+// 最初のページに飛ぶ
+const getFirstPage = () => {
+  getPokemonsByPage(url);
+};
+
+// 最後のページに飛ぶ
+const getLastPage = () => {
+  const url = `https://pokeapi.co/api/v2/pokemon?offset=${lastPageOffset}&limit=${limit}`;
+  getPokemonsByPage(url);
+};
 
 // 初期ページ表示
-getPokemonsByPage(url);
+document.addEventListener("DOMContentLoaded", getPokemonsByPage(url));

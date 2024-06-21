@@ -14,6 +14,8 @@
     </header>
     <div id="data-container" class="data-container"></div>
     <div class="pagination">
+      <button class="first-page-btn" onclick="getFirstPage()"><<</button>
+      &nbsp;
       <button
         onclick="getPokemonsByPage(sessionStorage.getItem('previous'))"
         id="previous"
@@ -27,6 +29,8 @@
       >
         <span>►</span>
       </button>
+      &nbsp;
+      <button class="last-page-btn" onclick="getLastPage()">>></button>
     </div>
   </body>
 </html>
