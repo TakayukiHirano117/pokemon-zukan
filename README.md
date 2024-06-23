@@ -44,21 +44,22 @@ Poke API, ブラウザ標準のFetch APIを使用しています。
 ## ディレクトリ構成
 tree /fによって確認。
 
-C:.
-│  detail.html
-│  index.html
-│  README.md
-│
-├─css
-│      detail.css
-│      style.css
-│
-├─js
-│      detail.js
-│      main.js
-│
-└─public
-        monstar-ball.png
+C:.<br>
+│  detail.html<br>
+│  index.html<br>
+│  README.md<br>
+│<br>
+├─css<br>
+│      detail.css<br>
+│      style.css<br>
+│<br>
+├─js<br>
+│      detail.js<br>
+│      main.js<br>
+│<br>
+└─public<br>
+        monstar-ball.png<br>
+        substitute.png<br>
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
 
