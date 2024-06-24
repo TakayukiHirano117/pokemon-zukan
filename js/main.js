@@ -11,8 +11,8 @@ const getPokemonsByPage = async (url) => {
   const res = await fetch(url, { cache: "force-cache" });
   const json = await res.json();
 
-  console.log(res)
-  console.log(json)
+  // console.log(res)
+  // console.log(json)
 
   // dataContainerの中身を削除
   const dataContainer = document.getElementById("data-container");
@@ -33,9 +33,16 @@ const getPokemonsByPage = async (url) => {
 
   const pokemonDetails = await Promise.all(pokemonDetailsPromises);
 
-  pokemonDetails.forEach((pokemonDetail, index) => {
-    const pokemon = pokemons[index];
+  pokemonDetails.forEach(async (pokemonDetail, index) => {
+    // ポケモン詳細情報を含むURL
+    const speciesUrl = pokemonDetail.species.url;
+    const res = await fetch(speciesUrl, { cache: "force-cache" });
+    const json = await res.json();
 
+    // 日本語名取得
+    const name = json.names.find((name) => name.language.name === "ja").name;
+
+    const pokemon = pokemons[index];
     const dataItem = document.createElement("div");
     dataItem.classList.add("data-item");
     dataItem.id = pokemon.url.split("/")[6];
@@ -49,7 +56,7 @@ const getPokemonsByPage = async (url) => {
     dataImg.classList.add("pokemon-img");
 
     const dataText = document.createElement("p");
-    dataText.textContent = pokemonDetail.species.name;
+    dataText.textContent = name;
     dataText.classList.add("pokemon-name");
 
     dataItem.appendChild(dataImg);
@@ -82,7 +89,7 @@ const getPokemonsByPage = async (url) => {
     next.classList.remove("disable-hover-style");
   }
 
-  displayCurrentPage()
+  displayCurrentPage();
 };
 
 // 最初のページに飛ぶ
@@ -101,19 +108,19 @@ document.addEventListener("DOMContentLoaded", getPokemonsByPage(url));
 
 // 現在のページ表示
 const displayCurrentPage = () => {
-  if (sessionStorage.getItem('previous') === 'null') {
+  if (sessionStorage.getItem("previous") === "null") {
     currentPage = 1;
-  } else if (sessionStorage.getItem('next') === 'null') {
-    currentPage = sessionStorage.getItem('count') / limit;
+  } else if (sessionStorage.getItem("next") === "null") {
+    currentPage = sessionStorage.getItem("count") / limit;
   } else {
-    const next = sessionStorage.getItem('next');
+    const next = sessionStorage.getItem("next");
     const nextObj = new URL(next);
     const nextParams = nextObj.searchParams;
-    const nextOffset = nextParams.get('offset');
+    const nextOffset = nextParams.get("offset");
 
     currentPage = nextOffset / limit;
   }
 
-  const target = document.getElementById('current-page');
+  const target = document.getElementById("current-page");
   target.textContent = currentPage;
-}
+};
