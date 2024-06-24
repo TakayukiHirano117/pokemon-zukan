@@ -4,12 +4,15 @@ const lastPageOffset = 1281;
 
 // Poke APIのエンドポイント
 const url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
-// https://pokeapi.co/api/v2/pokemon-species/8/
+// https://pokeapi.co/api/v2/pokemon-species/1/
 
 // ページに応じたポケモン取得
 const getPokemonsByPage = async (url) => {
   const res = await fetch(url, { cache: "force-cache" });
   const json = await res.json();
+
+  console.log(res)
+  console.log(json)
 
   // dataContainerの中身を削除
   const dataContainer = document.getElementById("data-container");
