@@ -4,7 +4,9 @@ const getPokemonSpecies = async (url) => {
   const res = await fetch(url, { cache: "force-cache" });
   const json = await res.json();
 
+  console.log(json)
   results = json.results;
+  console.log(results)
 
 //   ポケモンの日本語の名前・フレーバーテキスト・種類を取得
   results.map(async (result) => {
@@ -23,3 +25,12 @@ const getPokemonSpecies = async (url) => {
 };
 
 getPokemonSpecies(url);
+
+// const pokemonTypeUrl = "https://pokeapi.co/api/v2/type/12/"
+// 
+    // const name = json.names.find((name) => name.language.name === "ja").name;
+
+    // console.log(name)
+// }
+
+// getPokemonTypes(pokemonTypeUrl)

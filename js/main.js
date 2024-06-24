@@ -38,7 +38,6 @@ const getPokemonsByPage = async (url) => {
   const pokemonSpecies = await Promise.all(pokemonSpeciesPromises);
 
   pokemonDetails.forEach(async (pokemonDetail, index) => {
-    
     // ポケモンの日本語名を取得
     const name = pokemonSpecies[index].names.find((name) => name.language.name === "ja").name;
 
