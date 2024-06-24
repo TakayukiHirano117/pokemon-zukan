@@ -4,15 +4,11 @@ const lastPageOffset = 1281;
 
 // Poke APIのエンドポイント
 const url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
-// https://pokeapi.co/api/v2/pokemon-species/1/
 
 // ページに応じたポケモン取得
 const getPokemonsByPage = async (url) => {
   const res = await fetch(url, { cache: "force-cache" });
   const json = await res.json();
-
-  // console.log(res)
-  // console.log(json)
 
   // dataContainerの中身を削除
   const dataContainer = document.getElementById("data-container");
@@ -33,14 +29,18 @@ const getPokemonsByPage = async (url) => {
 
   const pokemonDetails = await Promise.all(pokemonDetailsPromises);
 
-  pokemonDetails.forEach(async (pokemonDetail, index) => {
-    // ポケモン詳細情報を含むURL
+  const pokemonSpeciesPromises = pokemonDetails.map(async (pokemonDetail) => {
     const speciesUrl = pokemonDetail.species.url;
     const res = await fetch(speciesUrl, { cache: "force-cache" });
-    const json = await res.json();
+    return res.json();
+  });
 
-    // 日本語名取得
-    const name = json.names.find((name) => name.language.name === "ja").name;
+  const pokemonSpecies = await Promise.all(pokemonSpeciesPromises);
+
+  pokemonDetails.forEach(async (pokemonDetail, index) => {
+    
+    // ポケモンの日本語名を取得
+    const name = pokemonSpecies[index].names.find((name) => name.language.name === "ja").name;
 
     const pokemon = pokemons[index];
     const dataItem = document.createElement("div");
