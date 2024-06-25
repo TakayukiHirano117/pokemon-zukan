@@ -9,32 +9,21 @@ const url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
 const getPokemonsByPage = async (url) => {
   const res = await fetch(url, { cache: "force-cache" });
   const json = await res.json();
-
-  // dataContainerの中身を削除
-  const dataContainer = document.getElementById("data-container");
-  dataContainer.innerHTML = "";
-
-  // sessionから次のページ・前のページのURL, ポケモンの総数を取得
-  sessionStorage.setItem("next", json.next);
-  sessionStorage.setItem("previous", json.previous);
-  sessionStorage.setItem("count", json.count);
-
   const pokemons = json.results;
 
-  // ポケモンの詳細情報を並列で取得
-  const pokemonDetailsPromises = pokemons.map(async (pokemon) => {
-    const res = await fetch(pokemon.url, { cache: "force-cache" });
-    return res.json();
-  });
+  // ポケモン情報を入れるコンテナ要素を配置
+  const dataContainer = document.getElementById("data-container");
+  // dataContainerの中身を削除
+  removeDataContainerContent(dataContainer);
 
+  setSessionItems(json);
+
+  // ポケモンの詳細情報を並列で取得
+  const pokemonDetailsPromises = getPokemonDetailsPromises(pokemons);
   const pokemonDetails = await Promise.all(pokemonDetailsPromises);
 
-  const pokemonSpeciesPromises = pokemonDetails.map(async (pokemonDetail) => {
-    const speciesUrl = pokemonDetail.species.url;
-    const res = await fetch(speciesUrl, { cache: "force-cache" });
-    return res.json();
-  });
-
+  // ポケモンの種族値を並列で取得
+  const pokemonSpeciesPromises = getPokemonSpeciesPromises(pokemonDetails)
   const pokemonSpecies = await Promise.all(pokemonSpeciesPromises);
 
   pokemonDetails.forEach(async (pokemonDetail, index) => {
@@ -123,3 +112,33 @@ const displayCurrentPage = () => {
   const target = document.getElementById("current-page");
   target.textContent = currentPage;
 };
+
+// dataContainerの中身を削除
+const removeDataContainerContent = (dataContainer) => {
+  dataContainer.innerHTML = "";
+}
+
+// sessionに次のページ・前のページのURL, ポケモンの総数を設定
+const setSessionItems = (json) => {
+  sessionStorage.setItem("next", json.next);
+  sessionStorage.setItem("previous", json.previous);
+  sessionStorage.setItem("count", json.count);
+}
+
+const getPokemonDetailsPromises = (pokemonDetails) => {
+  const pokemonDetailsPromises = pokemonDetails.map(async (pokemonDetail) => {
+    const res = await fetch(pokemonDetail.url, { cache: "force-cache" });
+    return res.json();
+  })
+
+  return pokemonDetailsPromises;
+}
+
+const getPokemonSpeciesPromises = (pokemonDetails) => {
+  const pokemonSpeciesPromises = pokemonDetails.map(async (pokemonDetail) => {
+    const res = await fetch(pokemonDetail.species.url, {cache: "force-cache"});
+    return res.json();
+  })
+
+  return pokemonSpeciesPromises;
+}
