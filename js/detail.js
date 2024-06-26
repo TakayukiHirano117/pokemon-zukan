@@ -75,7 +75,6 @@ const getSinglePokemon = async () => {
 
   physique.appendChild(heightText)
   physique.appendChild(weightText)
-
   dataItem.appendChild(dataImg);
   dataItem.appendChild(nameText);
   dataItem.appendChild(generaText);
