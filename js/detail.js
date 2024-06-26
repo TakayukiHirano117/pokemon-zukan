@@ -10,7 +10,6 @@ const getSinglePokemon = async () => {
   const pokemon = await res.json();
 
   const pokemonTypes = await getPokemonTypes(pokemon)
-  // console.log(pokemonTypes)
 
   const typesText = document.createElement('p');
   pokemonTypesText = pokemonTypes.join(' ')
@@ -38,9 +37,19 @@ const getSinglePokemon = async () => {
   const name = species.names.find((name) => name.language.name === "ja").name;
 
   // 日本語の種族名取得
-  const genera = species.genera.find(
+  const generaEntryJa = species.genera.find(
     (genus) => genus.language.name === "ja-Hrkt"
-  ).genus;
+  );
+
+  let genera;
+
+  if (generaEntryJa) {
+    genera = generaEntryJa.genus;
+  } else {
+    genera = '種族名が見つかりません';
+  }
+
+  
 
   const dataContainer = document.getElementById("data-container");
 
@@ -48,7 +57,11 @@ const getSinglePokemon = async () => {
   dataItem.classList.add("data-item");
 
   const dataImg = document.createElement("img");
-  dataImg.src = pokemon.sprites.front_default;
+  if (pokemon.sprites.front_default) {
+    dataImg.src = pokemon.sprites.front_default;
+  } else {
+    dataImg.src = 'public/substitute.png';
+  }
   dataImg.classList.add("pokemon-img");
 
   const nameText = document.createElement("p");
